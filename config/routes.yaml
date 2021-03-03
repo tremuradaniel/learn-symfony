@@ -1,9 +1,9 @@
 # in order for this to work with xampp, it seems that symfony/apache-pack is
 # needed
-index:
-    path: /
-    controller: App\Controller\DefaultController::index
+# index:
+#     path: /
+#     controller: App\Controller\DefaultController::index
    
-home:
-    path: /home
-    controller: App\Controller\DefaultController::home
+# home:
+#     path: /home
+#     controller: App\Controller\DefaultController::home
