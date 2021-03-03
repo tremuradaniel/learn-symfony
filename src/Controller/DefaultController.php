@@ -42,4 +42,20 @@ class DefaultController extends AbstractController
         return new Response("<h1>I'm the wildcard: $wildCardValue");
     }
 
+      /**
+     * @Route("/redirectHome", name="redirectHome")
+     */
+
+    public function redirectHome (): Response {
+        return $this->redirect('/');
+    }
+
+     /**
+     * @Route("/redirectToRouteName", name="redirectToRouteName")
+     */
+
+    public function redirectToRouteName (): Response {
+        return $this->redirectToRoute('JSONReturn');
+    }
+
 }
