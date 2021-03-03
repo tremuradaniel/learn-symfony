@@ -25,4 +25,12 @@ class DefaultController extends AbstractController
     public function JSONReturn(): Response {
         return $this->json(['name' => 'Test']);
     }
+
+    /**
+     * @Route("/ResponseReturn", name="ResponseReturn")
+     */
+
+    public function ResponseReturn(): Response {
+        return new Response("<h1>I'm a Response");
+    }
 }
