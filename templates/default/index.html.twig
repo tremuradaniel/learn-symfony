@@ -10,11 +10,17 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
-
+    <h2>Users: {{ users[0] }} </h2>
     This friendly message is coming from:
     <ul>
         <li>Your controller at <code><a href="{{ 'D:/_coding/learning/symfony/learn-symfony/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
         <li>Your template at <code><a href="{{ 'D:/_coding/learning/symfony/learn-symfony/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
+    </ul>
+    <h3>My list of users:</h3>
+    <ul>
+        {% for user in users %}
+            <li>{{ user }}</li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}
