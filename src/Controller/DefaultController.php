@@ -33,4 +33,13 @@ class DefaultController extends AbstractController
     public function ResponseReturn(): Response {
         return new Response("<h1>I'm a Response");
     }
+
+     /**
+     * @Route("/wildCard/{wildCardValue}", name="wildCard")
+     */
+
+    public function wildCard($wildCardValue): Response {
+        return new Response("<h1>I'm the wildcard: $wildCardValue");
+    }
+
 }
