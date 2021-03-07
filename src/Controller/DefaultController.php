@@ -144,4 +144,26 @@ class DefaultController extends AbstractController
         return new Response("<h1>I'm the wildcard: $page, test: $test");
     }
 
+    /**
+     * @Route({
+     *  "route1",
+     *  "route2"
+     * })
+     */
+
+    public function multipleRoute () {
+        return new Response("<h1>multipleRoute</h1>");
+    }
+
+    /**
+     * @Route({
+     *  "en": "route",
+     *  "ro": "ruta"
+     * })
+     */
+
+    public function multipleLanguagesRoute () {
+        return new Response("<h1>multipleLanguagesRoute</h1>");
+    }
+
 }
