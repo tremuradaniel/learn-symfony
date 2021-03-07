@@ -118,4 +118,17 @@ class DefaultController extends AbstractController
     public function blogList ($page) {
         return new Response("<h1>I'm the wildcard: $page");
     }
+
+    /**
+     * @Route(
+     *  "/optionalParam/{page?}", 
+     *  name="blog_list",
+     *  requirements={"page"="\d+"}
+     * )
+     */
+
+    public function optinoalParameters ($page) {
+        return new Response("<h1>I'm the wildcard: $page");
+    }
+
 }
