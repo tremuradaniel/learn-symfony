@@ -127,8 +127,21 @@ class DefaultController extends AbstractController
      * )
      */
 
-    public function optinoalParameters ($page) {
+    public function optionalParameters ($page) {
         return new Response("<h1>I'm the wildcard: $page");
+    }
+
+    /**
+     * @Route(
+     *  "/defaultParam/{page}/{test}", 
+     *  name="defaultParam",
+     *  requirements={"page"="\d+"},
+     *  defaults={"test": "test0"}
+     * )
+     */
+
+    public function defaultParam ($page, $test) {
+        return new Response("<h1>I'm the wildcard: $page, test: $test");
     }
 
 }
