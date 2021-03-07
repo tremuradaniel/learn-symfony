@@ -19,7 +19,7 @@
     <h3>My list of users:</h3>
     <ul>
         {% for user in users %}
-            <li>{{ user }}</li>
+            <li>{{ user }} - you won prize {{ random_gifts[loop.index0] }}</li>
         {% endfor %}
     </ul>
 </div>

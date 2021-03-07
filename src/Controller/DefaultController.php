@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\GiftsService;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +27,7 @@ class DefaultController extends AbstractController
      /**
      * @Route("/users", name="users")
      */
-    public function users(): Response
+    public function users(GiftsService $gifts): Response
     {
 
         // responsible for saving to the DB
@@ -46,14 +47,13 @@ class DefaultController extends AbstractController
         // // actual saving of both users
         // $entityManager->flush();
 
-        
-
         $usersDB = $this->getDoctrine()->getRepository(User::class)->findAll();
         $users = array_map(function ($user) { return $user->getName(); }, $usersDB );
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
-            'users' => $users
+            'users' => $users,
+            'random_gifts' => $gifts->gifts
         ]);
     }
 
