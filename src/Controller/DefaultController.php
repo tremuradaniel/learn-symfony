@@ -166,4 +166,24 @@ class DefaultController extends AbstractController
         return new Response("<h1>multipleLanguagesRoute</h1>");
     }
 
+    /**
+     * @Route(
+     *  "/flash_message"
+     * )
+     */
+
+    public function flashMessage () {
+        $this->addFlash(
+            'notice',
+            'This is a flash...'
+        );
+        $this->addFlash(
+            'warning',
+            'warning'
+        );
+        return $this->render('default/twigWithFlash.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
 }
