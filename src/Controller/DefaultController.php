@@ -11,11 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DefaultController extends AbstractController
 {
 
-    public function __construct (GiftsService $gifts) {
-        $gifts->gifts = [1, 2, 3, 4];
-    }
-
-
     /**
      * @Route("/", name="home")
      */
