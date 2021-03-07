@@ -32,20 +32,28 @@ class DefaultController extends AbstractController
         // responsible for saving to the DB
         $entityManager = $this->getDoctrine()->getManager();
 
-        $user = new User;
-        $user->setName('Ilie');
-        $user2 = new User;
-        $user2->setName('Marcel');
 
-        // preparation for saving in the DB
-        $entityManager->persist($user);
-        $entityManager->persist($user2);
-        // actual saving of both users
-        $entityManager->flush();
+        // add new user each time page is loaded
+
+        // $user = new User;
+        // $user->setName('Ilie');
+        // $user2 = new User;
+        // $user2->setName('Marcel');
+
+        // // preparation for saving in the DB
+        // $entityManager->persist($user);
+        // $entityManager->persist($user2);
+        // // actual saving of both users
+        // $entityManager->flush();
+
+        
+
+        $usersDB = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $users = array_map(function ($user) { return $user->getName(); }, $usersDB );
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
-            'users' => []
+            'users' => $users
         ]);
     }
 
