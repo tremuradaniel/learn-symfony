@@ -216,4 +216,16 @@ class DefaultController extends AbstractController
         return $this->file($path . 'test.pdf');
     }
 
+    /**
+     * @Route(
+     *  "/escape"
+     * )
+     */
+
+    public function escape () {
+        return $this->render('default/generalUrlsAndEscapeStrings.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
+
 }
