@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Services\GiftsService;
 use App\Entity\User;
+use App\Services\GiftsService;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -184,6 +185,24 @@ class DefaultController extends AbstractController
         return $this->render('default/twigWithFlash.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
+    }
+
+     /**
+     * @Route(
+     *  "/cookies"
+     * )
+     */
+
+    public function cookies () {
+        $cookie = new Cookie(
+            'my_cookie', // Cookie name
+            'cookie value',
+            time() + (2 * 365 * 24 * 60 * 60) // Expires after 2 years
+        );
+        $res = new Response("<h1>cookies</h1>");
+        $res->headers->setCookie($cookie);
+        $res->send();
+        return $res;
     }
 
 }
