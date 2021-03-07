@@ -106,4 +106,16 @@ class DefaultController extends AbstractController
         return $this->redirectToRoute('JSONReturn');
     }
 
+
+    /**
+     * @Route(
+     *  "/blog/{page}", 
+     *  name="blog_list",
+     *  requirements={"page"="\d+"}
+     * )
+     */
+
+    public function blogList ($page) {
+        return new Response("<h1>I'm the wildcard: $page");
+    }
 }
