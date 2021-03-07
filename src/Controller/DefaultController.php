@@ -205,4 +205,15 @@ class DefaultController extends AbstractController
         return $res;
     }
 
+    /**
+     * @Route(
+     *  "/download"
+     * )
+     */
+
+    public function download () {
+        $path = $this->getParameter('download_directory');
+        return $this->file($path . 'test.pdf');
+    }
+
 }
