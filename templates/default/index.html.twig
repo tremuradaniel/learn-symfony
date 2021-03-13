@@ -18,5 +18,12 @@
     </ul>
     <h3>My list of users:</h3>
     <h1>This is a global variable: {{ ga_code }}</h1>
+
+    {{
+        render(controller(
+            'App\\Controller\\DefaultController::mostPopularPosts',
+            {'number': 5}
+        ))
+    }}
 </div>
 {% endblock %}
