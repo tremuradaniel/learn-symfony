@@ -230,6 +230,16 @@ class DefaultController extends AbstractController
 
     public function mostPopularPosts($number = 3) {
         echo 'I\'m $number var from mostPopularPosts: ' . $number .'<br>';
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = new User();
+
+        $user->setName('Robert');
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        dump('A new user was saved with the id of ' . $user->getId());
+
         // db call mock
         $posts = ['p1', 'p2', 'p3'];
         return $this->render('default/most_popular_posts.html.twig', [
