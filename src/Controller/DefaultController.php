@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Services\GiftsService;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -246,5 +247,19 @@ class DefaultController extends AbstractController
             'posts' => $posts
         ]);
     }
+
+     /**
+     * @Route("/paramConv/{id}", name="default", name="home")
+     */
+    public function paramConv(Request $request, User $user)
+    {
+        // $entityManager = $this->getDoctrine()->getManager();
+        dump($user);
+        
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }  
+
 
 }

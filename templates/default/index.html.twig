@@ -10,7 +10,7 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
-    <h2>Users: {{ users[0] }} </h2>
+    <h2>Users: {% if user is defined %} {{ users[0] }} {% endif %} </h2>
     This friendly message is coming from:
     <ul>
         <li>Your controller at <code><a href="{{ 'D:/_coding/learning/symfony/learn-symfony/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
