@@ -261,5 +261,23 @@ class DefaultController extends AbstractController
         ]);
     }  
 
+     /**
+     * @Route("/lifecycle")
+     */
+    public function lifecycle()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = new User();
+
+        $user->setName('Robert');
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }  
+
+
 
 }
