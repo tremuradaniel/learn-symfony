@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Video;
+use App\Entity\Address;
 use App\Services\GiftsService;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -326,6 +327,33 @@ class DefaultController extends AbstractController
         ]);
     }  
 
+
+    /**
+     * @Route("/address")
+    */
+    public function address()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = new User();
+
+        $user->setName('Tom');
+
+        $address = new Address();
+
+        $address->setStreet('Ressu');
+        $address->setNumber('1');
+        $user->setAddress($address);
+
+        $entityManager->persist($user);
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        dump($user->getAddress()->getStreet());
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }  
 
 
 }
