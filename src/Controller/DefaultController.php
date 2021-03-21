@@ -355,5 +355,60 @@ class DefaultController extends AbstractController
         ]);
     }  
 
+     /**
+     * @Route("/manyToMany")
+    */
+    public function manyToMany()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+       
+        $user1 = $entityManager->getRepository(User::class)->find(1);
+        // $user2 = $entityManager->getRepository(User::class)->find(2);
+        // $user3 = $entityManager->getRepository(User::class)->find(3);
+
+        // $user1->addFollowed($user2);
+        // $user1->addFollowed($user3);
+        // $user2->addFollowed($user1);
+
+        // $entityManager->flush();
+
+        dump($user1->getFollowed()->count());
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }
+
+
+    /**
+     * @Route("/eagerLoging")
+    */
+    public function eagerLoging()
+    {
+    
+
+        $entityManager = $this->getDoctrine()->getManager();
+        // $user = new User();
+
+        // $user->setName('Robert');
+
+        // for ($i = 1; $i <=3; $i++) {
+        //     $video = new Video();
+        //     $video->setTitle('Video title - ' . $i);
+        //     $user->addVideo($video);
+        //     $entityManager->persist($video);
+        // }
+
+        // $entityManager->persist($user);
+        // $entityManager->flush();
+        $user = $entityManager->getRepository(User::class)->findWithVideos(1);
+        dump($user);
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+
+    }
+
 
 }
