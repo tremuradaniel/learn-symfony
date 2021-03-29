@@ -15,12 +15,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DefaultController extends AbstractController
 {
 
-    /**
-     * @Route("/", name="home")
-     */
     public function home(): Response
     {
         $users = ['Tim', 'Steve', 'Paul'];
+        dump('her');
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => $users
