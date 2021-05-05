@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Entity\Video;
 use App\Entity\Address;
 use App\Services\GiftsService;
+use App\Services\MyService;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,16 @@ class DefaultController extends AbstractController
         foreach($author->getFiles() as $file) {
             dump($file);
         }
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
+     * @Route("/service_parameters")
+    */
+    public function serviceParameters(Request $request, MyService $service) // service will be automatically instantiated
+    {
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
         ]);
