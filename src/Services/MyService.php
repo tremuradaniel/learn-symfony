@@ -2,8 +2,10 @@
   namespace App\Services;
 
   class MyService {
-    public function __construct()
+    public function __construct($param, $adminEmail, $globalParam)
     {
-      dump('I am alive!');
+      dump($param);
+      dump($adminEmail);
+      dump($globalParam);
     }
   }
