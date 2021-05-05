@@ -1,11 +1,10 @@
 <?php
+
   namespace App\Services;
 
   class MyService {
-    public function __construct($param, $adminEmail, $globalParam)
+    public function __construct(MySecondService $second_service)
     {
-      dump($param);
-      dump($adminEmail);
-      dump($globalParam);
+      dump($second_service);
     }
   }
