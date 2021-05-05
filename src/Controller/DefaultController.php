@@ -37,7 +37,9 @@ class DefaultController extends AbstractController
     */
     public function serviceParameters(Request $request, MyService $service) // service will be automatically instantiated
     {
+
         $service->someAction();
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
         ]);

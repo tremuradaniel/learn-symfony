@@ -4,16 +4,13 @@
 
   class MyService {
 
-    use OptionalServiceTrait;
-
-    public function __construct()
-    {
-      // dump($second_service);
-    }
+    public $logger;
+    public $my;
 
     public function someAction()
     {
-      dump($this->service->doSomething2());
+      dump($this->logger);
+      dump($this->my);
     }
 
   }

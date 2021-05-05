@@ -34,5 +34,7 @@ services:
     #         $second_service: '@App\Services\MySecondService'
 
 
-    # App\Services\MyService:
-    #     autowire: false # overwrite the autowire in _defaults
+    App\Services\MyService:
+        properties:
+            my: '@App\Services\MySecondService'
+            logger: '@monolog.logger'
