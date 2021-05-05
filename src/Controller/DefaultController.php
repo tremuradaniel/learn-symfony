@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Author;
+use App\Entity\Pdf;
+use App\Entity\File;
 use App\Entity\User;
 use App\Entity\Video;
 use App\Entity\Address;
@@ -17,11 +20,14 @@ class DefaultController extends AbstractController
 
     public function home(): Response
     {
-        $users = ['Tim', 'Steve', 'Paul'];
-        dump('her');
+        $entityManager = $this->getDoctrine()->getManager();
+        $author = $entityManager->getRepository(Author::class)->findByIdWithPdf(2);
+        dump($author);
+        foreach($author->getFiles() as $file) {
+            dump($file);
+        }
         return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-            'users' => $users
+            'controller_name' => 'DefaultController'
         ]);
     }
 
