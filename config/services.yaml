@@ -28,6 +28,11 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Services\MyService:
-        arguments:
-            $second_service: '@App\Services\MySecondService'
+    # autowire: true means that we can do without the code below
+    # App\Services\MyService:
+    #     arguments:
+    #         $second_service: '@App\Services\MySecondService'
+
+
+    # App\Services\MyService:
+    #     autowire: false # overwrite the autowire in _defaults
