@@ -35,6 +35,10 @@ services:
 
 
     App\Services\MyService:
-        properties:
-            my: '@App\Services\MySecondService'
-            logger: '@monolog.logger'
+        arguments:
+            $service: '@App\Services\MySecondService'
+    App\Services\MySecondService:
+        # this service will be instantiated only if an instance will be 
+        # explicitly created or if a method of this class will be directly called, 
+        # which leads to an instantiation of this class
+        lazy: true

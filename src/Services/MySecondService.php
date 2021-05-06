@@ -18,4 +18,9 @@
       return 'wow!';
     }
 
+    public function someMethod()
+    {
+      return 'hello';
+    }
+
   }

@@ -4,13 +4,9 @@
 
   class MyService {
 
-    public $logger;
-    public $my;
-
-    public function someAction()
-    {
-      dump($this->logger);
-      dump($this->my);
+    public function __construct($service) {
+      dump($service);
+      $this->secService = $service;
     }
 
   }
