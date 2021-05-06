@@ -2,18 +2,20 @@
 
 namespace App\Controller;
 
-use App\Entity\Author;
 use App\Entity\Pdf;
 use App\Entity\File;
 use App\Entity\User;
 use App\Entity\Video;
+use App\Entity\Author;
 use App\Entity\Address;
-use App\Services\GiftsService;
+use App\Services\AliasService;
 use App\Services\MyService;
+use App\Services\GiftsService;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
@@ -35,9 +37,22 @@ class DefaultController extends AbstractController
     /**
      * @Route("/service_parameters")
     */
-    public function serviceParameters(Request $request, MyService $service) // service will be automatically instantiated
+    public function serviceParameters(Request $request, MyService $service,
+        ContainerInterface $container)
     {
-        dump($service->secService->someMethod());
+        dump($container->get('app.myservice'));
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
+     * @Route("/service_parameters_alias")
+    */
+    public function serviceParametersAlias(Request $request, AliasService $service,
+        ContainerInterface $container)
+    {
+        dump($container->get('app.aliasService'));
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
         ]);

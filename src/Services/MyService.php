@@ -4,9 +4,8 @@
 
   class MyService {
 
-    public function __construct($service) {
-      dump($service);
-      $this->secService = $service;
+    public function __construct() {
+      dump('here!');
     }
 
   }

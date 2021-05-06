@@ -34,11 +34,15 @@ services:
     #         $second_service: '@App\Services\MySecondService'
 
 
-    App\Services\MyService:
+    app.myservice:
+        class: App\Services\MyService
+        public: true
+
+    App\Services\MyService: '@app.myservice'
+
+    app.aliasService:
+        class: App\Services\AliasService
         arguments:
-            $service: '@App\Services\MySecondService'
-    App\Services\MySecondService:
-        # this service will be instantiated only if an instance will be 
-        # explicitly created or if a method of this class will be directly called, 
-        # which leads to an instantiation of this class
-        lazy: true
+            $some: 'something'
+        public: true
+    App\Services\AliasService: '@app.aliasService'
