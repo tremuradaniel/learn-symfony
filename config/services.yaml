@@ -37,6 +37,9 @@ services:
     app.myservice:
         class: App\Services\MyService
         public: true
+        tags: 
+            - { name: doctrine.event_listener, event: postFlush }
+            - { name: kernel.cache_clearer }
 
     App\Services\MyService: '@app.myservice'
 

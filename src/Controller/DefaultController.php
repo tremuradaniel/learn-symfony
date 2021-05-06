@@ -37,10 +37,15 @@ class DefaultController extends AbstractController
     /**
      * @Route("/service_parameters")
     */
-    public function serviceParameters(Request $request, MyService $service,
-        ContainerInterface $container)
+    public function serviceParameters(Request $request)
     {
-        dump($container->get('app.myservice'));
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = new User();
+
+        $user->setName('Robert');
+        $entityManager->persist($user);
+        $entityManager->flush();
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
         ]);
