@@ -52,6 +52,6 @@ services:
 
     App\Services\ServiceInterface: '@App\Services\ServiceOne'
 
-    App\Services\KernelResponseListener:
+    App\Listeners\VideoCreatedListener:
         tags:
-            - { name: kernel.event_listener, event: kernel.response }
+            - { name: kernel.event_listener, event: video.created.event, method: onVideoCreatedEvent }
