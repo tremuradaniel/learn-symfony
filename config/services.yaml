@@ -51,3 +51,7 @@ services:
     App\Services\AliasService: '@app.aliasService'
 
     App\Services\ServiceInterface: '@App\Services\ServiceOne'
+
+    App\Services\KernelResponseListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }
