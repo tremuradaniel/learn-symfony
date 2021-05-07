@@ -49,3 +49,5 @@ services:
             $some: 'something'
         public: true
     App\Services\AliasService: '@app.aliasService'
+
+    App\Services\ServiceInterface: '@App\Services\ServiceOne'

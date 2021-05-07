@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Services\ServiceInterface;
 
 class DefaultController extends AbstractController
 {
@@ -29,6 +30,17 @@ class DefaultController extends AbstractController
         foreach($author->getFiles() as $file) {
             dump($file);
         }
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
+     * @Route("/service_diff")
+     */
+    public function serviceDiff(Request $request, ServiceInterface $service)
+    {
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
         ]);
