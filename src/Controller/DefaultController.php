@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Services\ServiceInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 class DefaultController extends AbstractController
 {
@@ -30,6 +31,29 @@ class DefaultController extends AbstractController
         foreach($author->getFiles() as $file) {
             dump($file);
         }
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
+     * @Route("/cache")
+     */
+    public function cache(Request $request)
+    {
+        $cache = new FilesystemAdapter();
+        $posts = $cache->getItem('database.get_posts');
+        if (!$posts->isHit())
+        {
+            $posts_from_db = ['post_1', 'post_2'];
+            dump('simulating db connection');
+            $posts->set(serialize($posts_from_db));
+            $posts->expiresAfter(5);
+            $cache->save($posts);
+        }
+        $cache->deleteItem('database.get_posts');
+        dump(unserialize($posts->get()));
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
         ]);
