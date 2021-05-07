@@ -11,6 +11,7 @@ use App\Entity\Address;
 use App\Services\AliasService;
 use App\Services\MyService;
 use App\Services\GiftsService;
+use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +32,42 @@ class DefaultController extends AbstractController
         foreach($author->getFiles() as $file) {
             dump($file);
         }
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
+     * @Route("/cache_tags")
+     */
+    public function cacheTags(Request $request): Response
+    {
+        $cache = new TagAwareAdapter(new FilesystemAdapter());
+
+        $acer = $cache->getItem('acer');
+        $dell = $cache->getItem('dell');
+        $ibm = $cache->getItem('ibm');
+        $apple = $cache->getItem('apple');
+
+        if (!$acer->isHit())
+        {
+            $acer_from_db = 'acer laptop';
+            $acer->set($acer_from_db);
+            $acer->tag(['computers', 'laptops', 'acer']);
+        }
+
+        if (!$dell->isHit())
+        {
+            $dell_from_db = 'dell laptop';
+            $dell->set($dell_from_db);
+            $dell->tag(['computers', 'laptops', 'acer']);
+        }
+
+        dump($acer->get());
+        dump($dell->get());
+        dump($ibm->get());
+        dump($apple->get());
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
         ]);
