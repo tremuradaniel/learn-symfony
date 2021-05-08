@@ -28,10 +28,10 @@ class VideoCreatedSubscriber implements EventSubscriberInterface
     {
         return [
             'video.created.event' => 'onVideoCreatedEvent',
-            KernelEvents::RESPONSE => [
-                ['onKernelResponse1', 2],
-                ['onKernelResponse2', 1]
-            ]
+//            KernelEvents::RESPONSE => [
+//                ['onKernelResponse1', 2],
+//                ['onKernelResponse2', 1]
+//            ]
         ];
     }
 }
