@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Video;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,6 +34,10 @@ class VideoFormType extends AbstractType
 //            ])
             ->add('save', SubmitType::class, [
                 'label' => 'Add a video'
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Agree?',
+                'mapped' => false
             ])
         ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
