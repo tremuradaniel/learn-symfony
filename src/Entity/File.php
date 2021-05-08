@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
@@ -22,6 +23,7 @@ abstract class File
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min = 2, minMessage="Titlul câmpului video trebuie să aibă minim {{ limit }} caractere", max = 150)
      */
     private $filename;
 
