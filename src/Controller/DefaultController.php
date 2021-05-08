@@ -45,11 +45,11 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/form")
+     * @Route("/form", name="form")
      */
     public function form(Request $request)
     {
-
+        $entityManager = $this->getDoctrine()->getManager();
         $video = new Video();
         $video->setFilename('Write a blog post');
         $video->setCreatedAt(new \DateTime('tomorrow'));
@@ -58,8 +58,9 @@ class DefaultController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
-            dump($form->getData());
-//            return $this->redirectToRoute('home');
+            $entityManager->persist($video);
+            $entityManager->flush();
+            return $this->redirectToRoute('form');
         }
         return $this->render('default/form.html.twig', [
             'controller_name' => 'DefaultController',

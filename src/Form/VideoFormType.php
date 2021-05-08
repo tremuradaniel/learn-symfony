@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Video;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,6 +19,11 @@ class VideoFormType extends AbstractType
             ->add('filename', TextType::class, [
                 'label' => 'Set Video Title'
             ])
+            ->add('description', TextType::class, [
+                'label' => 'Set Description'
+            ])
+            ->add('size', IntegerType::class)
+            ->add('duration', IntegerType::class)
             ->add('created_at', DateType::class, [
                 'label' => 'Set date',
                 'widget' => 'single_text',

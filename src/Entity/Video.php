@@ -11,19 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
 class Video extends File
 {
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $format;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $duration;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created_at;
 
     public function getFormat(): ?string
     {
@@ -45,18 +40,6 @@ class Video extends File
     public function setDuration(int $duration): self
     {
         $this->duration = $duration;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
 
         return $this;
     }
