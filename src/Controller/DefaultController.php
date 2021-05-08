@@ -22,6 +22,7 @@ use App\Services\ServiceInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use App\Events\VideoCreatedEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use App\Form\VideoFormType;
 
 class DefaultController extends AbstractController
 {
@@ -40,6 +41,29 @@ class DefaultController extends AbstractController
         }
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
+     * @Route("/form")
+     */
+    public function form(Request $request)
+    {
+
+        $video = new Video();
+        $video->setFilename('Write a blog post');
+        $video->setCreatedAt(new \DateTime('tomorrow'));
+
+        $form = $this->createForm(VideoFormType::class, $video);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            dump($form->getData());
+//            return $this->redirectToRoute('home');
+        }
+        return $this->render('default/form.html.twig', [
+            'controller_name' => 'DefaultController',
+            'form' => $form->createView()
         ]);
     }
 
