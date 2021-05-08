@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -38,6 +39,9 @@ class VideoFormType extends AbstractType
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => 'Agree?',
                 'mapped' => false
+            ])
+            ->add('file_path', FileType::class, [
+                'label' => 'Urcă fișier'
             ])
         ;
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {

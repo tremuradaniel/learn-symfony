@@ -47,6 +47,16 @@ abstract class File
      */
     private $created_at;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\File(
+     *     maxSize="1024k",
+     *     mimeTypes={"video/mp4", "application/pdf"},
+     *     mimeTypesMessage="Te rog încarcă un fișier valid!"
+     * )
+     */
+    private $file_path;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +118,18 @@ abstract class File
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getFilePath(): ?string
+    {
+        return $this->file_path;
+    }
+
+    public function setFilePath(string $file_path): self
+    {
+        $this->file_path = $file_path;
 
         return $this;
     }
