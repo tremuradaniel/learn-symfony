@@ -114,6 +114,9 @@
     "ocramius/proxy-manager": {
         "version": "2.2.3"
     },
+    "php-webdriver/webdriver": {
+        "version": "1.11.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
     },
@@ -275,6 +278,9 @@
             "./src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v4.4.22"
+    },
     "symfony/http-foundation": {
         "version": "v4.2.12"
     },
@@ -320,6 +326,15 @@
     "symfony/orm-pack": {
         "version": "v2.1.0"
     },
+    "symfony/panther": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "93d9baa582d0a755cc9ef81bc38a921d5fa16973"
+        }
+    },
     "symfony/phpunit-bridge": {
         "version": "5.1",
         "recipe": {
@@ -348,6 +363,9 @@
         "version": "v1.22.1"
     },
     "symfony/polyfill-php72": {
+        "version": "v1.22.1"
+    },
+    "symfony/polyfill-php73": {
         "version": "v1.22.1"
     },
     "symfony/process": {
