@@ -3,7 +3,9 @@
 index:
     path: /
     controller: App\Controller\DefaultController::home
-   
+
+logout:
+    path: /logout
 # home:
 #     path: /home
 #     controller: App\Controller\DefaultController::home

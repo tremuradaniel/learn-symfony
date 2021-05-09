@@ -18,5 +18,8 @@
     </ul>
     <h3>My list of users:</h3>
     <h1>This is a global variable: {{ ga_code }}</h1>
+    {% if app.user %}
+        <a href="{{ path('logout') }}">logout</a>
+    {% endif %}
 </div>
 {% endblock %}
