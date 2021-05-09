@@ -1,4 +1,8 @@
 # See https://symfony.com/doc/current/email/dev_environment.html
 swiftmailer:
-    # send all emails to a specific address
-    #delivery_addresses: ['me@example.com']
+  url: '%env(MAILER_URL)%'
+  spool:
+    type: 'file'
+    # these can be send later using cron jobs
+    # bin/console swiftmailer:spool:send --message-limit=10
+    path: '%kernel.project_dir%/var/spool'
