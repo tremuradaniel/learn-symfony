@@ -26,6 +26,7 @@ use App\Events\VideoCreatedEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Form\VideoFormType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class DefaultController extends AbstractController
 {
@@ -34,16 +35,29 @@ class DefaultController extends AbstractController
         $this->dispatcher = $dispatcher;
     }
 
+    /**
+     * @Route("/home", name="home")
+     */
     public function home(): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $author = $entityManager->getRepository(Author::class)->findByIdWithPdf(2);
-        dump($author);
-        foreach($author->getFiles() as $file) {
-            dump($file);
-        }
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
+     * @Route("/login", name="login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils)
+    {
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error
         ]);
     }
 
@@ -474,7 +488,7 @@ class DefaultController extends AbstractController
     }
 
      /**
-     * @Route("/paramConv/{id}", name="default", name="home")
+     * @Route("/paramConv/{id}", name="default", name="paramConv")
      */
     public function paramConv(Request $request, User $user)
     {
