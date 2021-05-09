@@ -45,6 +45,31 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/mail")
+     */
+    public function mail(Request $request, \Swift_Mailer $mailer)
+    {
+
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('send@example.com')
+            ->setTo('recipient@example.com')
+            ->setBody(
+                $this->renderView(
+                    'emails/registration.html.twig',
+                    array('name' => 'Robert')
+                ),
+                'text/html'
+            )
+        ;
+
+        $mailer->send($message);
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
      * @Route("/form", name="form")
      */
     public function form(Request $request)
