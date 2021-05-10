@@ -1,36 +1,27 @@
+{# templates/default/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Hello {{ controller_name }}!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    <h2>Users: {% if user is defined %} {{ users[0] }} {% endif %} </h2>
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/_coding/learning/symfony/learn-symfony/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/_coding/learning/symfony/learn-symfony/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
-    <h3>My list of users:</h3>
-    <h1>This is a global variable: {{ ga_code }}</h1>
-    {% if app.user %}
-        <a href="{{ path('logout') }}">logout</a>
-    {% endif %}
+    <div class="example-wrapper">
+        <h1>Hello {{ controller_name }}! ✅</h1>
 
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="...">Delete something...</a>
-    {% endif %}
-
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <p>Username: {{ app.user.username }}</p>
-    {% endif %}
-
-    <a href="{{ path('login') }}">awesome link</a>
-
-</div>
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a href="{{ 'src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
+            <li>Your template at <code><a href="{{ 'templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
+        </ul>
+        {# {{ form(form) }} #}
+        {% if app.user %}
+            <a href="{{path('logout')}}">logout</a>
+        {% endif %}
+        <a href="{{path('login')}}">awesome link</a>
+        {{ 'some.key'|trans|raw }}
+    </div>
 {% endblock %}
