@@ -64,6 +64,22 @@ class DefaultController extends AbstractController
     }
 
     /**
+     * @Route("/user_videos", name="user_videos")
+     */
+    public function userVideos(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $video = $entityManager->getRepository(Video::class)->find(1);
+
+        $this->denyAccessUnlessGranted('VIDEO_DELETE', $video);
+
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController'
+        ]);
+    }
+
+    /**
      * @Route("/login", name="login")
      */
     public function login(AuthenticationUtils $authenticationUtils)
