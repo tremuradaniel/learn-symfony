@@ -29,5 +29,8 @@
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         <p>Username: {{ app.user.username }}</p>
     {% endif %}
+
+    <a href="{{ path('login') }}">awesome link</a>
+
 </div>
 {% endblock %}
