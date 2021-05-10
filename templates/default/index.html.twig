@@ -21,5 +21,13 @@
     {% if app.user %}
         <a href="{{ path('logout') }}">logout</a>
     {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="...">Delete something...</a>
+    {% endif %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Username: {{ app.user.username }}</p>
+    {% endif %}
 </div>
 {% endblock %}
