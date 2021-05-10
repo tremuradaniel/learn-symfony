@@ -3,18 +3,49 @@
 namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Entity\Video;
 
 class DefaultControllerTest extends WebTestCase
 {
+
+    private $entityManager;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->client = static::createClient();
+
+        $this->entityManager = $this->client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $this->entityManager->beginTransaction();
+        $this->entityManager->getConnection()->setAutoCommit(false);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->entityManager->rollback();
+        $this->entityManager->close();
+        $this->entityManager = null;
+    }
+
     /**
      * @dataProvider provideUrls
      */
     public function testSomething($url)
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', $url);
+        $crawler = $this->client->request('GET', $url);
+        $this->assertTrue($this->client->getResponse()->isSuccessful());
 
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $video = $this->entityManager
+            ->getRepository(Video::class)
+            ->find(1);
+
+        $this->entityManager->remove($video);
+        $this->entityManager->flush();
+
+        $this->assertNull($this->entityManager
+            ->getRepository(Video::class)
+            ->find(1));
 
     }
 

@@ -13,7 +13,6 @@ use Doctrine\ORM\Event\PostFlushEventArgs;
     public function postFlush(PostFlushEventArgs $args)
     {
       dump('hello from postFlush');
-      dump($args);
     }
 
     public function clear()
