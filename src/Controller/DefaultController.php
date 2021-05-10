@@ -13,6 +13,7 @@ use App\Form\RegisterUserType;
 use App\Services\AliasService;
 use App\Services\MyService;
 use App\Services\GiftsService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Cache\Adapter\TagAwareAdapter;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,14 +36,20 @@ class DefaultController extends AbstractController
         $this->dispatcher = $dispatcher;
     }
 
+    // @Security("has_role('ROLE_ADMIN')")
     /**
-     * @Route("/home", name="home")
+     * @Route("/home/{id}/delete-video", name="home")
+     * @Security("user.getId() == video.getSecurityUser().getId()")
      */
-    public function home(): Response
+    public function home(Request $request, UserPasswordEncoderInterface $passwordEncoder, Video $video)
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $users = $entityManager->getRepository(SecurityUser::class)->findAll();
+        dump($users);
+        dump($video);
 
         return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController'
+            'controller_name' => 'DefaultController',
         ]);
     }
 
