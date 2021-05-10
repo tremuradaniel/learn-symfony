@@ -38,18 +38,28 @@ class DefaultController extends AbstractController
 
     // @Security("has_role('ROLE_ADMIN')")
     /**
-     * @Route("/home/{id}/delete-video", name="home")
-     * @Security("user.getId() == video.getSecurityUser().getId()")
+     * @Route("/", name="home")
      */
-    public function home(Request $request, UserPasswordEncoderInterface $passwordEncoder, Video $video)
+    public function home(Request $request)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $users = $entityManager->getRepository(SecurityUser::class)->findAll();
-        dump($users);
-        dump($video);
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
+        ]);
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin(AuthenticationUtils $authenticationUtils)
+    {
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error
         ]);
     }
 
